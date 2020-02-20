@@ -51,11 +51,9 @@ export default handleActions(
         [CHECK_SUCCESS]: (state, {payload: user}) => ({
             ...state,
             user,
-            checkError: null,
         }),
         [CHECK_FAILURE]: (state, {payload: error}) => ({
             ...state,
-            user: null,
             checkError: error,
         }),
         [LOGOUT]: state => ({

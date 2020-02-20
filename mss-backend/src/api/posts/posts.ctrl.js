@@ -1,8 +1,37 @@
 import Post from "../../models/post";
 import mongoose from "mongoose";
 import Joi from '@hapi/joi';
+import sanitizeHtml from 'sanitize-html';
 
 const {ObjectId} = mongoose.Types;
+
+/*
+허용할 html 태그와 속성 설정
+htt[://www.npmjs.com/package/sanitize-html 참고
+ */
+const sanitizeOption = {
+    allowedTags: [
+        'h1',
+        'h2',
+        'b',
+        'i',
+        'u',
+        's',
+        'p',
+        'ul',
+        'ol',
+        'li',
+        'blockquote',
+        'a',
+        'img',
+    ],
+    allowedAttributes: {
+        a: ['href', 'name', 'target'],
+        img: ['src'],
+        li: ['class'],
+    },
+    allowedSchemes: ['data', 'http'],
+};
 
 /*
 파라미터로 입력받은 id가 올바른 ObjectId이면 post를 ctx.state에 저장
@@ -16,7 +45,7 @@ export const getPostById = async (ctx, next) => {
 
     try {
         const post = await Post.findById(id);
-        // 포스트가 없으면 오류를 반환합니다.
+        // 포스트가 없으면 오류를 반환
         if (!post) {
             ctx.status = 404;
             return;
@@ -28,6 +57,9 @@ export const getPostById = async (ctx, next) => {
     }
 };
 
+/*
+본인이 작성한 포스트가 맞는지 확인
+ */
 export const checkOwnPost = (ctx, next) => {
     const {user, post} = ctx.state;
     if (post.user._id.toString() !== user._id) {
@@ -35,6 +67,16 @@ export const checkOwnPost = (ctx, next) => {
         return;
     }
     return next();
+};
+
+/*
+html을 없애고 내용이 너무 길면 200자로 제한하는 함수
+ */
+const removeHtmlAndShorten = body => {
+    const filtered = sanitizeHtml(body, {
+        allowedTags: [],
+    });
+    return filtered.length < 200 ? filtered : `${filtered.slice(0, 200)}...`
 };
 
 /*
@@ -66,11 +108,11 @@ export const write = async ctx => {
         return ;
     }
     
-    // REST API의 Request Body는 ctx.request.body에서 조회할 수 있습니다.
+    // REST API의 Request Body는 ctx.request.body에서 조회 가능
     const {title, body, tags} = ctx.request.body;
     const post = new Post({
         title,
-        body,
+        body: sanitizeHtml(body, sanitizeOption),
         tags,
         user: ctx.state.user,
     });
@@ -87,8 +129,8 @@ export const write = async ctx => {
 GET /api/posts
  */
 export const list = async ctx => {
-    // query는 문자열이기 때문에 숫자로 변환해 주어야 합니다.
-    // 값이 주어지지 않았다면 1을 기본으로 사용합니다.
+    // query는 문자열이기 때문에 숫자로 변환해 줘야함
+    // 값이 주어지지 않았다면 1을 기본으로 사용
     const page = parseInt(ctx.query.page || '1', 10);
     if (page < 1) {
         ctx.status = 400;
@@ -114,8 +156,7 @@ export const list = async ctx => {
         ctx.body = posts
             .map(post => ({
                 ...post,
-                body:
-                post.body.length < 200 ? post.body : `${post.body.slice(0,200)}...`,
+                body: removeHtmlAndShorten(post.body),
             }));
     } catch (e) {
         ctx.throw(500, e)
@@ -136,7 +177,7 @@ DELETE /api/posts/:id
  */
 export const remove = async ctx => {
     const {id} = ctx.params;
-    // 해당 id를 가진 post가 몇 번째인지 확인합니다.
+    // 해당 id를 가진 post가 몇 번째인지 확인
     try {
         const post = await Post.findByIdAndRemove(id).exec();
         ctx.status = 204;
@@ -153,11 +194,11 @@ PATCH /api/posts/:id
  "body": "수정한 내용",
  "tags": ["수정한 태그1", "수정한 태그2"]
 }
- PATCH 메서드는 주어진 필드만 교체합니다.
+ PATCH 메서드는 주어진 필드만 교체
  */
 export const update = async ctx => {
     const {id} = ctx.params;
-    const schema = Joi.object.keys({
+    const schema = Joi.object().keys({
         // 객체가 문자열임을 검증
         title: Joi.string(),
         body: Joi.string(),
@@ -174,12 +215,18 @@ export const update = async ctx => {
         return ;
     }
 
+    // 객체를 복사하고 body 값이 주어졌으면 html 필터링
+    const nextData = {...ctx.request.body};
+    if (nextData.body) {
+        nextData.body = sanitizeHtml(nextData.body, sanitizeOption);
+    }
+
     try {
-        const post = await Post.findByIdAndUpdate(id, ctx.request.body, {
-            new: true, // 이 값을 설정하면 업데이트된 데이터를 반환합니다.
-            // false일 때는 업데이트되기 전의 데이터를 반환합니다.
+        const post = await Post.findByIdAndUpdate(id, nextData, {
+            new: true, // 이 값을 설정하면 업데이트된 데이터를 반환
+            // false일 때는 업데이트되기 전의 데이터를 반환
         }).exec();
-        // 포스트가 없으면 오류를 반환합니다.
+        // 포스트가 없으면 오류를 반환
         if (!post) {
             ctx.status = 404;
             return;
