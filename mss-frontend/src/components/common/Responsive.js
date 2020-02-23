@@ -4,6 +4,7 @@ import styled from "styled-components";
 const StyledResponsive = styled.div`
     padding: 0 1rem;
     width: 1024px;
+    height: 100%;
     margin: 0 auto;
     
     @media(max-width: 1024px) {

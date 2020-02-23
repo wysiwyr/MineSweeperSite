@@ -1,0 +1,45 @@
+.block {
+  float: left;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  width: 30px;
+  height: 30px;
+  border: none;
+  cursor: pointer;
+  &.open-block {
+    background: #e5c29f;
+    &.val-1{
+      color: #1976d2;
+    }
+    &.val-2{
+      color: #388e3c;
+    }
+    &.val-3{
+      color: #d32f2f;
+    }
+    &.val-4{
+      color: #7b1fa1;
+    }
+    &.val-5{
+      color: #ffcd1a;
+    }
+  }
+  &.closed-block {
+    background: #a7d947;
+    color: #be3333;
+    &:hover {
+      background: #d1eb8c;
+    }
+  }
+  & > img {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+button:focus {
+  outline: none;
+}

@@ -6,6 +6,7 @@ import user, {userSaga} from "./user";
 import write, {writeSaga} from "./write";
 import post, {postSaga} from "./post";
 import posts, {postsSaga} from "./posts";
+import game from "./game";
 
 const rootReducer = combineReducers({
     auth,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
     write,
     post,
     posts,
+    game,
 });
 
 export function* rootSaga() {

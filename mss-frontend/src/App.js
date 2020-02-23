@@ -1,12 +1,12 @@
 import React from 'react';
 import {Route} from 'react-router-dom';
 import {Helmet} from 'react-helmet-async';
-import './App.css';
 import PostListPage from "./pages/PostListPage";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import PostPage from "./pages/PostPage";
 import WritePage from "./pages/WritePage";
+import GamePage from "./pages/GamePage";
 
 const App = () => {
     return (
@@ -19,8 +19,9 @@ const App = () => {
             <Route component={LoginPage} path={"/login"}/>
             <Route component={PostPage} path={"/@:username/:postId"}/>
             <Route component={WritePage} path={"/write"}/>
+            <Route component={GamePage} path={"/game"}/>
         </>
     );
-}
+};
 
 export default App;

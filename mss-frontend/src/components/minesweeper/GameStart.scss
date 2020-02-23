@@ -1,0 +1,46 @@
+#start-root {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+#start-select-div {
+  font-size: 1.2rem;
+  margin-bottom: 0.6rem;
+}
+
+#start-select-div > label {
+  display: block;
+  margin-bottom: 0.6rem;
+  color: #898989;
+  font-weight: bold;
+}
+
+#start-select-div > select {
+  width: 8rem;
+  height: 3rem;
+  background: rgba(74, 117, 44, 0.9);
+  color: #efefef;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
+  border: #4a752c;
+}
+
+#start-btn-div > button {
+  float: none;
+  width: 8rem;
+  height: 3rem;
+  font-size: 1.2rem;
+  border: none;
+  background: rgba(96, 144, 49, 0.85);
+  color: #efefef;
+  font-weight: bold;
+  cursor: pointer;
+
+  &:hover {
+    background: #609031;
+  }
+}

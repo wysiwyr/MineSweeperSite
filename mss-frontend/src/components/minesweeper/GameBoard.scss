@@ -1,0 +1,35 @@
+#board-minNum-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 55px;
+  background: #4a752c;
+}
+
+#board-minNum-div > h2 {
+  text-align: center;
+  color: #efefef;
+}
+
+#board-restart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+}
+
+#board-restart > button {
+  float: none;
+  width: 100%;
+  height: 3rem;
+  font-size: 1.2rem;
+  border: none;
+  background: rgba(96, 144, 49, 0.85);
+  color: #efefef;
+  font-weight: bold;
+  cursor: pointer;
+
+  &:hover {
+    background: #609031;
+  }
+}

@@ -39,7 +39,7 @@ const PostViewerContainer = ({match, history}) => {
         } catch (e) {
             console.log(e);
         }
-    }
+    };
 
     return (
         <PostViewer
