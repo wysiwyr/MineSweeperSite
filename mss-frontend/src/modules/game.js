@@ -8,7 +8,7 @@ const OPEN_BLOCK = 'game/OPEN_BLOCK';
 const SET_FLAG = 'game/SET_FLAG';
 const FINISH_GAME = 'game/FINISH_GAME';
 
-export const initialize = createAction(INITIALIZE);
+export const initializeGame = createAction(INITIALIZE);
 export const setLevel = createAction(SET_LEVEL, level => level);
 export const startGame = createAction(START_GAME,
     ({ground, size, width, mineNum}) => ({
@@ -19,12 +19,13 @@ export const startGame = createAction(START_GAME,
     }));
 export const openBlock = createAction(OPEN_BLOCK, id => id);
 export const setFlag = createAction(SET_FLAG, id => id);
-export const finishGame = createAction(FINISH_GAME);
+export const finishGame = createAction(FINISH_GAME, clear => clear);
 
 const initialState = {
     level: '쉬움',
-    isStarted: false,
-    isFinished: false,
+    isStart: false,
+    isFinish: false,
+    isClear: '',
     ground: [],
     size: 0,
     width: 0,
@@ -41,7 +42,7 @@ export default handleActions(
         }),
         [START_GAME]: (state, {payload: {ground, size, width, mineNum}}) => ({
             ...state,
-            isStarted: true,
+            isStart: true,
             ground: ground,
             size: size,
             width: width,
@@ -57,10 +58,11 @@ export default handleActions(
             produce(state, draft => {
                 draft.ground[id].flagSet = !draft.ground[id].flagSet;
             }),
-        [FINISH_GAME]: state =>
+        [FINISH_GAME]: (state, {payload: clear}) =>
             produce(state, draft => {
                 draft.ground.map(space => space.val === 'X' ? space.isOpen = true : space);
-                draft.isFinished = true;
+                draft.isFinish = true;
+                draft.isClear = clear;
             }),
     }, initialState
 );

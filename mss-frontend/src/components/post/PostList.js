@@ -11,7 +11,7 @@ const StyledPostList = styled(Responsive)`
     margin-top: 3rem
 `;
 
-const WritePostButtonWrapper = styled.div`
+const GameStartButtonWrapper = styled.div`
     display: flex;
     justify-content: flex-end;
     margin-bottom: 3rem;
@@ -61,20 +61,20 @@ const PostItem = ({post}) => {
     )
 };
 
-const PostList = ({posts, error, loading, showWriteButton}) => {
+const PostList = ({posts, error, loading, showStartButton}) => {
     if (error) {
         return <StyledPostList>에러가 발생했습니다!</StyledPostList>
     }
 
     return (
         <StyledPostList>
-            <WritePostButtonWrapper>
-                {showWriteButton && (
-                    <Button to={"/write"} cyan>
-                        새 글 작성하기
+            <GameStartButtonWrapper>
+                {showStartButton && (
+                    <Button to={"/game"} cyan>
+                        게임 시작!
                     </Button>
                 )}
-            </WritePostButtonWrapper>
+            </GameStartButtonWrapper>
             <div>
                 {!loading && posts && (
                     posts.map(post => (

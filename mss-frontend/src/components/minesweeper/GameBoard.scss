@@ -1,14 +1,20 @@
-#board-minNum-div {
+#board-root {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 55px;
-  background: #4a752c;
+}
+
+#board-minNum-div {
+  display: inline-block;
+  width: 100%;
+  border-bottom: 1px solid #e9ecef;
+  margin-bottom: 1rem;
 }
 
 #board-minNum-div > h2 {
+  height: 35px;
   text-align: center;
-  color: #efefef;
 }
 
 #board-restart {
@@ -16,6 +22,7 @@
   justify-content: center;
   align-items: center;
   height: 50px;
+  margin-top: 1rem;
 }
 
 #board-restart > button {
@@ -23,13 +30,5 @@
   width: 100%;
   height: 3rem;
   font-size: 1.2rem;
-  border: none;
-  background: rgba(96, 144, 49, 0.85);
   color: #efefef;
-  font-weight: bold;
-  cursor: pointer;
-
-  &:hover {
-    background: #609031;
-  }
 }

@@ -1,20 +1,20 @@
 import React, {useCallback, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {initialize, finishGame} from "../../modules/game";
+import {initializeGame, finishGame} from "../../modules/game";
 import GameBoard from "../../components/minesweeper/GameBoard";
 
 const GameBoardContainer = () => {
     const dispatch = useDispatch();
     const {
-        isStarted,
-        isFinished,
+        isStart,
+        isFinish,
         ground,
         size,
         mineNum,
         openBlockNum,
     } = useSelector(({game}) => ({
-        isStarted: game.isStarted,
-        isFinished: game.isFinished,
+        isStart: game.isStart,
+        isFinish: game.isFinish,
         ground: game.ground,
         size: game.size,
         mineNum: game.mineNum,
@@ -22,14 +22,14 @@ const GameBoardContainer = () => {
     }));
 
     const onRestart = useCallback(() => {
-        dispatch(initialize());
+        dispatch(initializeGame());
     }, [dispatch]);
 
     useEffect(() => {
-        if (mineNum === size - openBlockNum && isStarted && !isFinished) {
-            dispatch(finishGame());
+        if (mineNum === size - openBlockNum && isStart && !isFinish) {
+            dispatch(finishGame('Game Clear!!!'));
         }
-    }, [dispatch, isStarted, isFinished, ground, size, mineNum, openBlockNum]);
+    }, [dispatch, isStart, isFinish, ground, size, mineNum, openBlockNum]);
 
     return (
         <GameBoard

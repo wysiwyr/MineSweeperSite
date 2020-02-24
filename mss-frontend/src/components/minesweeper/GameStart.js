@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "../common/Button";
 import './GameStart.scss'
 
 const GameStart = ({onStart, onSetLevel}) => {
@@ -20,7 +21,7 @@ const GameStart = ({onStart, onSetLevel}) => {
                 </select>
             </div>
             <div id={"start-btn-div"}>
-                <button onClick={onStart}>시작</button>
+                <Button onClick={onStart}>시작</Button>
             </div>
         </div>
     );

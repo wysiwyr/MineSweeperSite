@@ -29,7 +29,7 @@ const PostListContainer = ({match, location}) => {
             posts={posts}
             error={error}
             loading={loading}
-            showWriteButton={user}
+            showStartButton={user}
         />
     );
 };

@@ -6,12 +6,12 @@ import GameBlock from "../../components/minesweeper/GameBlock";
 const GameBlockContainer = ({space}) => {
     const dispatch = useDispatch();
     const {
-        isFinished,
+        isFinish,
         ground,
         size,
         width,
     } = useSelector(({game}) => ({
-        isFinished: game.isFinished,
+        isFinish: game.isFinish,
         ground: game.ground,
         size: game.size,
         width: game.width,
@@ -22,9 +22,9 @@ const GameBlockContainer = ({space}) => {
         let range = [-width, -1, 1, width, -width - 1, -width + 1, width - 1, width + 1];
         let id = parseInt(e.target.id);
 
-        if (!(isFinished || ground[id].isOpen)) {
+        if (!(isFinish || ground[id].isOpen)) {
             if (ground[id].val === 'X') {
-                dispatch(finishGame());
+                dispatch(finishGame('Game Over...'));
             } else if (ground[id].val === 0) {
                 let visited = new Array(size).fill(false);
                 let queue = [id];
@@ -74,13 +74,13 @@ const GameBlockContainer = ({space}) => {
                 dispatch(openBlock(id));
             }
         }
-    }, [dispatch, isFinished, ground, size, width]);
+    }, [dispatch, isFinish, ground, size, width]);
 
     const onSetFlag = useCallback((e, id)  => {
-        if (!(isFinished || ground[id].isOpen) && e.button === 2) {
+        if (!(isFinish || ground[id].isOpen) && e.button === 2) {
             dispatch(setFlag(id));
         }
-    }, [dispatch, isFinished, ground]);
+    }, [dispatch, isFinish, ground]);
 
     return (
         <GameBlock

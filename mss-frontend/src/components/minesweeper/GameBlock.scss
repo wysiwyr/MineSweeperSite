@@ -1,5 +1,6 @@
 .block {
   float: left;
+  outline: none;
   margin: 0;
   padding: 0;
   text-align: center;
@@ -7,10 +8,11 @@
   font-weight: bold;
   width: 30px;
   height: 30px;
+  line-height: 30px;
   border: none;
   cursor: pointer;
   &.open-block {
-    background: #e5c29f;
+    background: #e9ecef;
     &.val-1{
       color: #1976d2;
     }
@@ -28,10 +30,10 @@
     }
   }
   &.closed-block {
-    background: #a7d947;
+    background: #495057;
     color: #be3333;
     &:hover {
-      background: #d1eb8c;
+      background: #868e96;
     }
   }
   & > img {
@@ -40,6 +42,3 @@
   }
 }
 
-button:focus {
-  outline: none;
-}

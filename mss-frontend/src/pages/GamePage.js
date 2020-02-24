@@ -1,12 +1,13 @@
 import React from 'react';
-import Responsive from "../components/common/Responsive";
+import HeaderContainer from "../container/common/HeaderContainer";
 import Game from "../components/minesweeper/Game";
 
 const GamePage = () => {
     return (
-        <Responsive>
+        <>
+            <HeaderContainer/>
             <Game/>
-        </Responsive>
+        </>
     );
 };
 
