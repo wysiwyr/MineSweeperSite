@@ -1,2 +1,2 @@
 # MineSweeperSite
- 지뢰 찾기 서버 배포용
+ 지뢰 찾기 사이트
