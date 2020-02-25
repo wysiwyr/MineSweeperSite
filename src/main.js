@@ -34,7 +34,7 @@ app.use(jwtMiddleWare);
 // app 인스턴스에 라우터 적용
 app.use(router.routes()).use(router.allowedMethods());
 
-const buildDirectory = path.resolve(__dirname, '../frontend/build');
+const buildDirectory = path.resolve(__dirname, './frontend/build');
 app.use(serve(buildDirectory));
 app.use(async ctx => {
     // 상태가 404이고, 주소가 /api로 시작하지 않으면 index.html 반환
