@@ -29,9 +29,11 @@ export default handleActions(
         [READ_POST_SUCCESS]: (state, {payload: post}) => ({
             ...state,
             post: post,
+            error: null,
         }),
         [READ_POST_FAILURE]: (state, {payload: error}) => ({
             ...state,
+            post: null,
             error: error,
         }),
         [UNLOAD_POST]: () => initialState,

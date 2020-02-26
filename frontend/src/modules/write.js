@@ -90,9 +90,11 @@ export default handleActions(
         [UPDATE_POST_SUCCESS]: (state, {payload: post}) => ({
             ...state,
             post: post,
+            postError: null,
         }),
         [UPDATE_POST_FAILURE]: (state, {payload: postError}) => ({
             ...state,
+            post: null,
             postError: postError,
         }),
     },

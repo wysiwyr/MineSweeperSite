@@ -62,17 +62,21 @@ export default handleActions(
         [REGISTER_SUCCESS]: (state, {payload: auth}) => ({
             ...state,
             auth,
+            authError: null,
         }),
         [REGISTER_FAILURE]: (state, {payload: error}) => ({
             ...state,
+            auth: null,
             authError: error,
         }),
         [LOGIN_SUCCESS]: (state, {payload: auth}) => ({
             ...state,
             auth,
+            authError: null,
         }),
         [LOGIN_FAILURE]: (state, {payload: error}) => ({
             ...state,
+            auth: null,
             authError: error,
         }),
     },
