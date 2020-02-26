@@ -1,12 +1,12 @@
 import React from 'react';
 import HeaderContainer from "../container/common/HeaderContainer";
-import Game from "../components/minesweeper/Game";
+import GameContainer from "../container/game/GameContainer";
 
 const GamePage = () => {
     return (
         <>
             <HeaderContainer/>
-            <Game/>
+            <GameContainer/>
         </>
     );
 };

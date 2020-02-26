@@ -1,7 +1,7 @@
 import React, {useCallback} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {setLevel, startGame} from "../../modules/game";
-import GameStart from "../../components/minesweeper/GameStart";
+import GameStart from "../../components/game/GameStart";
 
 const GameStartContainer = () => {
     const dispatch = useDispatch();

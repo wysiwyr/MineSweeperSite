@@ -1,5 +1,6 @@
 import {createAction, handleActions} from "redux-actions";
 import produce from "immer";
+import calcDate from "../lib/calcDate";
 
 const INITIALIZE = 'game/INITIALIZE';
 const SET_LEVEL = 'game/SET_LEVEL';
@@ -31,6 +32,8 @@ const initialState = {
     width: 0,
     mineNum: 0,
     openBlockNum: 0,
+    startTime: null,
+    time: null,
 };
 
 export default handleActions(
@@ -47,6 +50,7 @@ export default handleActions(
             size: size,
             width: width,
             mineNum: mineNum,
+            startTime: new Date(),
         }),
         [OPEN_BLOCK]: (state, {payload: id}) =>
             produce(state, draft => {
@@ -63,6 +67,7 @@ export default handleActions(
                 draft.ground.map(space => space.val === 'X' ? space.isOpen = true : space);
                 draft.isFinish = true;
                 draft.isClear = clear;
+                draft.time = calcDate(draft.startTime, new Date());
             }),
     }, initialState
 );

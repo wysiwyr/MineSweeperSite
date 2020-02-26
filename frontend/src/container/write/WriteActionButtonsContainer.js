@@ -6,13 +6,15 @@ import WriteActionButtons from "../../components/write/WriteActionButton";
 
 const WriteActionButtonsContainer = ({history}) => {
     const dispatch = useDispatch();
-    const {title, body, tags, post, postError, originalPostId} = useSelector(({write}) => ({
+    const {title, body, tags, post, postError, originalPostId, level, time} = useSelector(({write, game}) => ({
         title: write.title,
         body: write.body,
         tags: write.tags,
         post: write.post,
         postError: write.postError,
         originalPostId: write.originalPostId,
+        level: game.level,
+        time: game.time,
     }));
 
     const onPublish = () => {
@@ -32,6 +34,8 @@ const WriteActionButtonsContainer = ({history}) => {
         dispatch(
             writePost({
                 title,
+                level,
+                time,
                 body,
                 tags
             }),

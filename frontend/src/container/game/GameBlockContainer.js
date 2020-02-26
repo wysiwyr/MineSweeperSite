@@ -1,7 +1,7 @@
 import React, {useCallback} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {finishGame, openBlock, setFlag} from "../../modules/game";
-import GameBlock from "../../components/minesweeper/GameBlock";
+import GameBlock from "../../components/game/GameBlock";
 
 const GameBlockContainer = ({space}) => {
     const dispatch = useDispatch();

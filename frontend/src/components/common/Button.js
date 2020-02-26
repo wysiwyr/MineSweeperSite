@@ -41,6 +41,12 @@ const buttonStyle = css`
             margin-top: ${props.marginTop};
         `
     }
+    ${props => 
+    props.block &&
+    css`
+        display: block;
+        `
+    }
     &:disabled {
         background: ${palette.gray[3]};
         color: ${palette.gray[5]};

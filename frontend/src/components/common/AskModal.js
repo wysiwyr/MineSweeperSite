@@ -48,7 +48,6 @@ const AskModal = (
         description,
         confirmText = '확인',
         cancelText = '취소',
-        clear,
         onConfirm,
         onCancel,
     }
@@ -63,17 +62,9 @@ const AskModal = (
                     <StyledButton onClick={onCancel}>
                         {cancelText}
                     </StyledButton>
-                    {clear === 'Game Clear!!!'
-                        ? (
-                            <StyledButton to={"/write"} cyan>
-                                {confirmText}
-                            </StyledButton>
-                        )
-                        : (
-                            <StyledButton onClick={onConfirm} cyan>
-                                {confirmText}
-                            </StyledButton>
-                        )}
+                    <StyledButton onClick={onConfirm} cyan>
+                        {confirmText}
+                    </StyledButton>
                 </div>
             </StyledAskModal>
         </Fullscreen>

@@ -37,7 +37,7 @@ const PostViewer = ({post, error, loading, actionButtons}) => {
         return null;
     }
 
-    const {title, body, user, publishedDate, tags} = post;
+    const {title, level, time, body, user, publishedDate, tags} = post;
 
     return (
         <StyledPostViewer>
@@ -45,6 +45,8 @@ const PostViewer = ({post, error, loading, actionButtons}) => {
                 <h1>{title}</h1>
                 <SubInfo
                     username={user.username}
+                    level={level}
+                    time={time}
                     publishedDate={publishedDate}
                     hasMarginTop
                 />

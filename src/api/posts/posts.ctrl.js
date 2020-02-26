@@ -84,6 +84,8 @@ const removeHtmlAndShorten = body => {
 Post /api/posts
 {
  "title": "제목",
+ "level": "난이도",
+ "time": "걸린 시간",
  "body": "내용",
  "tags": ["태그1", "태그2"]
 }
@@ -92,6 +94,8 @@ export const write = async ctx => {
     const schema = Joi.object().keys({
         // 객체가 다음 필드를 가지고 있고 문자열임을 검증
         title: Joi.string().required(), // required()가 있으면 필수 항목
+        level: Joi.string().required(),
+        time: Joi.string().required(),
         body: Joi.string().required(),
         tags: Joi.array()
             .items(Joi.string())
@@ -109,9 +113,11 @@ export const write = async ctx => {
     }
     
     // REST API의 Request Body는 ctx.request.body에서 조회 가능
-    const {title, body, tags} = ctx.request.body;
+    const {title, level, time, body, tags} = ctx.request.body;
     const post = new Post({
         title,
+        level,
+        time,
         body: sanitizeHtml(body, sanitizeOption),
         tags,
         user: ctx.state.user,

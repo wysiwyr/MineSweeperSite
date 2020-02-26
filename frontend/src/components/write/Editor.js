@@ -19,6 +19,15 @@ const TitleInput = styled.input`
     width: 100%;
 `;
 
+const LevelTimeBlock = styled.div`
+    p {
+        margin: 0;
+        margin-bottom: 0.5rem;
+        font-size: 1.25rem;
+        font-weight: bold;
+    }
+`;
+
 const QuillWrapper = styled.div`
     /* 에디터 최소 크기 지정 및 padding 제거 */
     .qu-editor {
@@ -32,7 +41,7 @@ const QuillWrapper = styled.div`
     }
 `;
 
-const Editor = ({title, body, onChangeField}) => {
+const Editor = ({title, body, level, time, onChangeField}) => {
     const quillElement = useRef(null); // Quill을 적용할 DivElement를 설정
     const quillIstance = useRef(null); // Quill 인스턴스를 설정
 
@@ -79,6 +88,14 @@ const Editor = ({title, body, onChangeField}) => {
                 onChange={onChangeTitle}
                 placeholder={"제목을 입력하세요!"}
             />
+            <LevelTimeBlock>
+                <p>
+                    난이도: {level}
+                </p>
+                <p>
+                    클리어 타임: {time}
+                </p>
+            </LevelTimeBlock>
             <QuillWrapper>
                 <div ref={quillElement}/>
             </QuillWrapper>

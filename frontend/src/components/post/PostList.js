@@ -33,14 +33,14 @@ const StyledPostItem = styled.div`
         &:hover {
             color: ${palette.gray[6]};
         }
-        p {
-            margin-top: 2rem;
-        }
+    }
+    p {
+       margin-top: 1.5rem;
     }
 `;
 
 const PostItem = ({post}) => {
-    const {_id, title, body, user, publishedDate, tags} = post;
+    const {_id, title, level, time, body, user, publishedDate, tags} = post;
 
     return (
         <StyledPostItem>
@@ -51,6 +51,8 @@ const PostItem = ({post}) => {
             </h2>
             <SubInfo
                 username={user.username}
+                level={level}
+                time={time}
                 publishedDate={publishedDate}
             />
             <Tags

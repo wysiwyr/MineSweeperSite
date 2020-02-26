@@ -1,9 +1,10 @@
 import React, {useCallback, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {initializeGame, finishGame} from "../../modules/game";
-import GameBoard from "../../components/minesweeper/GameBoard";
+import GameBoard from "../../components/game/GameBoard";
+import {withRouter} from 'react-router-dom';
 
-const GameBoardContainer = () => {
+const GameBoardContainer = ({history}) => {
     const dispatch = useDispatch();
     const {
         isStart,
@@ -25,6 +26,10 @@ const GameBoardContainer = () => {
         dispatch(initializeGame());
     }, [dispatch]);
 
+    const onClear = useCallback(() => {
+        history.push('/write');
+    }, [history]);
+
     useEffect(() => {
         if (mineNum === size - openBlockNum && isStart && !isFinish) {
             dispatch(finishGame('Game Clear!!!'));
@@ -34,8 +39,9 @@ const GameBoardContainer = () => {
     return (
         <GameBoard
             onRestart={onRestart}
+            onClear={onClear}
         />
     );
 };
 
-export default GameBoardContainer;
+export default withRouter(GameBoardContainer);
