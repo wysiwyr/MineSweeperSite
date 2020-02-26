@@ -42,14 +42,10 @@ const LoginForm = ({history}) => {
     // 로그인 성공/실패 처리
     useEffect(() => {
         if (authError) {
-            console.log('오류');
-            console.log(authError);
             setError('로그인 실패');
             return;
         }
         if (auth) {
-            console.log('성공');
-            console.log(auth);
             dispatch(check());
         }
     }, [auth, authError, dispatch]);
