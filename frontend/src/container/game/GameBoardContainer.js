@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {initializeGame, finishGame} from "../../modules/game";
+import {initializeGame, increaseOpenBlockNum, finishGame} from "../../modules/game";
 import GameBoard from "../../components/game/GameBoard";
 import {withRouter} from 'react-router-dom';
 
@@ -29,6 +29,13 @@ const GameBoardContainer = ({history}) => {
     const onClear = useCallback(() => {
         history.push('/write');
     }, [history]);
+
+    useEffect(() => {
+        const openBlock = ground.filter(space => space.isOpen === true);
+        if (openBlock.length !== openBlockNum) {
+            dispatch(increaseOpenBlockNum(openBlock.length));
+        }
+    }, [dispatch, ground, openBlockNum]);
 
     useEffect(() => {
         if (mineNum === size - openBlockNum && isStart && !isFinish) {

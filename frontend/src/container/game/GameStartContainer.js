@@ -33,7 +33,7 @@ const GameStartContainer = () => {
         }
 
         for (let i = 0; i < size; i++) {
-            ground.push({id: i, val: 0, isOpen: false, flagSet: false});
+            ground.push({id: i, val: 0, isOpen: false, flagSet: false, isHighlight: false,});
         }
 
         for (let i = 0; i < mineNum; i++) {

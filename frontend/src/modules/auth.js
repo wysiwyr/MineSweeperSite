@@ -58,25 +58,32 @@ export default handleActions(
         [INITIALIZE_FORM]: (state, {payload: form}) => ({
             ...state,
             [form]: initialState[form],
+            authError: null,
+        }),
+        [REGISTER]: (state) => ({
+            ...state,
+            auth: null,
+            authError: null,
         }),
         [REGISTER_SUCCESS]: (state, {payload: auth}) => ({
             ...state,
             auth,
-            authError: null,
         }),
         [REGISTER_FAILURE]: (state, {payload: error}) => ({
             ...state,
-            auth: null,
             authError: error,
+        }),
+        [LOGIN]: (state) => ({
+            ...state,
+            auth: null,
+            authError: null,
         }),
         [LOGIN_SUCCESS]: (state, {payload: auth}) => ({
             ...state,
             auth,
-            authError: null,
         }),
         [LOGIN_FAILURE]: (state, {payload: error}) => ({
             ...state,
-            auth: null,
             authError: error,
         }),
     },
