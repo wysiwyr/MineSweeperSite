@@ -13,31 +13,31 @@ const StyledPagination = styled.div`
 
 const PageNumber = styled.div``;
 
-const buildLink = ({page, username, tag}) => {
-    const query = qs.stringify({page, tag});
+const buildLink = ({page, username, tag, level}) => {
+    const query = qs.stringify({page, tag, level});
     return username ? `/@${username}?${query}` : `/?${query}`;
 };
 
-const Pagination = ({page, lastPage, username, tag}) => {
+const Pagination = ({page, lastPage, username, tag, level}) => {
     return (
         <StyledPagination>
             <Button
                 disabled={page === 1}
                 to={
-                    page === 1 ? undefined : buildLink({username, tag, page: page - 1})
+                    page === 1 ? undefined : buildLink({page: page - 1, username, tag, level})
                 }
             >
                 이전
             </Button>
             <PageNumber>{page}</PageNumber>
             <Button
-                disabled={lastPage === 0 || page === lastPage}
+                disabled={lastPage === 1 || page === lastPage}
                 to={
-                    lastPage === 0
+                    lastPage === 1
                     ? undefined
                     : page === lastPage
                         ? undefined
-                        : buildLink({username, tag, page: page + 1})
+                        : buildLink({page: page + 1, username, tag, level})
                 }
             >
                 다음

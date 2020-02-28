@@ -75,11 +75,11 @@ export default handleActions(
             }),
         [HIGHLIGHT_ON]: (state, {payload: id}) =>
             produce(state, draft => {
-                draft.ground[id].isHighlight = !draft.ground[id].isHighlight;
+                draft.ground[id].isHighlight = true;
             }),
         [HIGHLIGHT_OFF]: (state, {payload: id}) =>
             produce(state, draft => {
-                draft.ground[id].isHighlight = !draft.ground[id].isHighlight;
+                draft.ground[id].isHighlight = false;
             }),
         [FINISH_GAME]: (state, {payload: clear}) =>
             produce(state, draft => {

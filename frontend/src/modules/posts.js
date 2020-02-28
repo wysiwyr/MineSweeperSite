@@ -9,10 +9,11 @@ const [
     LIST_POSTS_FAILURE,
 ] = createRequsetActionType('posts/LIST_POSTS');
 
-export const listPosts = createAction(LIST_POSTS, ({page, username, tag}) => ({
+export const listPosts = createAction(LIST_POSTS, ({page, username, tag, level}) => ({
         page,
         username,
         tag,
+        level,
     }),
 );
 
@@ -30,6 +31,10 @@ const initialState = {
 
 export default handleActions(
     {
+        [LIST_POSTS]: state => ({
+            ...state,
+            error: null,
+        }),
         [LIST_POSTS_SUCCESS]: (state, {payload: posts, meta: response}) => ({
             ...state,
             posts,

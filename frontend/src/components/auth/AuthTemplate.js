@@ -45,4 +45,4 @@ const AuthTemplate = ({children}) => {
     )
 };
 
-export default AuthTemplate;
+export default React.memo(AuthTemplate);

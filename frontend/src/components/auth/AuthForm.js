@@ -30,10 +30,11 @@ const StyledInput = styled.input`
     }
 `;
 
-// 회원가입/로그인 링크
+// 메인 화면, 회원가입/로그인 링크
 const Footer = styled.div`
-    margin-top: 2rem;
-    text-align: right;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
     a {
         color: ${palette.gray[6]};
         text-decoration: underline;
@@ -93,6 +94,9 @@ const AuthForm = ({type, form, onChange, onSubmit, error}) => {
                 </Button>
             </form>
             <Footer>
+                <Link to={"/"}>
+                    메인 화면
+                </Link>
                 {type === 'login' ? (
                     <Link to={"/register"}>회원가입</Link>
                 ) : (
@@ -103,4 +107,4 @@ const AuthForm = ({type, form, onChange, onSubmit, error}) => {
     );
 };
 
-export default AuthForm;
+export default React.memo(AuthForm);

@@ -1,5 +1,5 @@
-import React, {useCallback, useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import React, {useCallback} from "react";
+import {useDispatch, useSelector, shallowEqual} from "react-redux";
 import {finishGame, openBlock, setFlag, highlightOn, highlightOff} from "../../modules/game";
 import GameBlock from "../../components/game/GameBlock";
 
@@ -17,17 +17,17 @@ const GameBlockContainer = ({space}) => {
         size: game.size,
         width: game.width,
         nearBlock: game.nearBlock,
-    }));
+    }), shallowEqual);
 
     const onBlockOpen = useCallback(stringId => {
 
         const storeNearBlock = nearBlock.slice();
-        let id = parseInt(stringId);
+        let id = parseInt(stringId, 10);
 
-        if (!(isFinish || ground[id].isOpen)) {
-            if (ground[id].val === 'X') {
+        if (!(isFinish || space.isOpen)) {
+            if (space.val === 'X') {
                 dispatch(finishGame('Game Over...'));
-            } else if (ground[id].val === 0) {
+            } else if (space.val === 0) {
                 let visited = new Array(size).fill(false);
                 let queue = [id];
                 let zeroBlock = [id];
@@ -76,7 +76,7 @@ const GameBlockContainer = ({space}) => {
                 dispatch(openBlock(id));
             }
         }
-    }, [dispatch, isFinish, ground, size, width, nearBlock]);
+    }, [dispatch, isFinish, ground, space, size, width, nearBlock]);
 
     const onMouseDownAction = useCallback((e, id) => {
         if (!(isFinish || ground[id].isOpen) && e.button === 2) {

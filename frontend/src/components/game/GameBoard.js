@@ -53,12 +53,12 @@ const GameBoard = ({onRestart, onClear}) => {
             </div>
             <Board>
                 {
-                    ground.map(space => {
-                        return <GameBlockContainer
+                    ground.map(space => (
+                        <GameBlockContainer
                             key={space.id}
                             space={space}
                         />
-                    })
+                    ))
                 }
             </Board>
             {isFinish

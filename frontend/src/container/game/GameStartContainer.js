@@ -25,7 +25,7 @@ const GameStartContainer = () => {
                 width = 18;
                 break;
             case '어려움':
-                mineNum = 50;
+                mineNum = 100;
                 size = 480;
                 width = 24;
                 break;
@@ -91,4 +91,4 @@ const GameStartContainer = () => {
     );
 };
 
-export default GameStartContainer;
+export default React.memo(GameStartContainer);

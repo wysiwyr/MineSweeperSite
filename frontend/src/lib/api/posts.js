@@ -1,14 +1,15 @@
 import qs from 'qs';
 import client from './client';
 
-export const listPosts = ({page, username, tag}) => {
+export const listPosts = ({page, username, tag, level}) => {
     const queryString = qs.stringify({
         page,
         username,
         tag,
+        level,
     });
 
-    return client.get(`/api/posts${queryString}`);
+    return client.get(`/api/posts?${queryString}`);
 };
 
 export const readPost = id => client.get(`/api/posts/${id}`);

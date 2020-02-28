@@ -5,7 +5,8 @@ import createRequestSaga, {createRequsetActionType} from "../lib/createRequestSa
 import * as authAPI from '../lib/api/auth';
 
 const CHANGE_FIELD = 'auth/CHANGE_FIELD';
-const INITIALIZE_FORM = 'auth/INITIALIZE_FORM';
+const ENTER_FORM = 'auth/ENTER_FORM';
+const LEAVE_FORM = 'auth/LEAVE_FORM';
 const [REGISTER, REGISTER_SUCCESS, REGISTER_FAILURE] = createRequsetActionType('auth/REGISTER');
 const [LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE] = createRequsetActionType('auth/LOGIN');
 
@@ -17,7 +18,8 @@ export const changeField = createAction(
         value,  // 입력된 값
     })
 );
-export const initializeForm = createAction(INITIALIZE_FORM, form => form);
+export const enterForm = createAction(ENTER_FORM, form => form);
+export const leaveForm = createAction(LEAVE_FORM);
 export const register = createAction(REGISTER, ({username, password}) => ({
     username,
     password
@@ -45,6 +47,7 @@ const initialState = {
         username: '',
         password: '',
     },
+    initialize: '',
     auth: null,
     authError: null,
 };
@@ -55,9 +58,17 @@ export default handleActions(
             produce(state, draft => {
                 draft[form][key] = value;
             }),
-        [INITIALIZE_FORM]: (state, {payload: form}) => ({
+        [ENTER_FORM]: (state, {payload: form}) => ({
             ...state,
             [form]: initialState[form],
+            initialize: form,
+            auth: null,
+            authError: null,
+        }),
+        [LEAVE_FORM]: state => ({
+            ...state,
+            initialize: '',
+            auth: null,
             authError: null,
         }),
         [REGISTER]: (state) => ({

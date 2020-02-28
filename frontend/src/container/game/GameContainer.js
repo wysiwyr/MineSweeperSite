@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch, useSelector, shallowEqual} from "react-redux";
 import {initializeGame} from "../../modules/game";
 import {withRouter} from 'react-router-dom';
 import Game from "../../components/game/Game";
@@ -11,7 +11,7 @@ const GameContainer = ({history}) => {
     const {isStart, user} = useSelector(({game, user}) => ({
         isStart: game.isStart,
         user: user.user,
-    }));
+    }), shallowEqual);
 
     useEffect(() => {
         if (user === null) {

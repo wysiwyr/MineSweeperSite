@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {changeField, initializeForm, login} from "../../modules/auth";
+import React, {useCallback, useEffect, useState} from "react";
+import {useDispatch, useSelector, shallowEqual} from "react-redux";
+import {changeField, enterForm, leaveForm, login} from "../../modules/auth";
 import AuthForm from "../../components/auth/AuthForm";
 import {check} from "../../modules/user";
 import {withRouter} from 'react-router-dom';
@@ -8,15 +8,16 @@ import {withRouter} from 'react-router-dom';
 const LoginForm = ({history}) => {
     const [error, setError] = useState(null);
     const dispatch = useDispatch();
-    const {form, auth, authError, user} = useSelector(({auth, user}) => ({
+    const {form, initialize, auth, authError, user} = useSelector(({auth, user}) => ({
         form: auth.login,
+        initialize: auth.initialize,
         auth: auth.auth,
         authError: auth.authError,
         user: user.user,
-    }));
+    }), shallowEqual);
 
     // 값 변경 이벤트 핸들러
-    const onChange = e => {
+    const onChange = useCallback(e => {
         const {name, value} = e.target;
         dispatch(
             changeField({
@@ -25,34 +26,40 @@ const LoginForm = ({history}) => {
                 value
             })
         )
-    };
+    }, [dispatch]);
 
     // 폼 등록 이벤트 핸들러
-    const onSubmit = e => {
+    const onSubmit = useCallback(e => {
         e.preventDefault();
         const {username, password} = form;
         dispatch(login({username, password}));
-    };
+    }, [dispatch, form]);
 
-    // 컴포넌트가 처음 렌더링될 떼 form을 초기화함
+    // 컴포넌트가 처음 렌더링 되거나 페이지를 떠날 때 form을 초기화함
     useEffect(() => {
-        dispatch(initializeForm('login'));
-        return () => {
-            console.log('leave');
-            dispatch(initializeForm('login'));
+        dispatch(enterForm('login'));
+
+        return() => {
+            dispatch(leaveForm('login'));
         }
     }, [dispatch]);
 
     // 로그인 성공/실패 처리
     useEffect(() => {
-        if (authError) {
-            setError('로그인 실패');
-            return;
+        if (initialize === 'login') {
+            if (authError) {
+                if (authError.response.status === 401) {
+                    setError('아이디 또는 비밀번호가 일치하지 않습니다');
+                    return;
+                }
+                setError('로그인 실패');
+                return;
+            }
+            if (auth) {
+                dispatch(check());
+            }
         }
-        if (auth) {
-            dispatch(check());
-        }
-    }, [auth, authError, dispatch]);
+    }, [initialize, auth, authError, dispatch]);
 
     // user 값이 잘 설정되었는지 확인
     useEffect(() => {
@@ -78,4 +85,4 @@ const LoginForm = ({history}) => {
     )
 };
 
-export default withRouter(LoginForm);
+export default React.memo(withRouter(LoginForm));

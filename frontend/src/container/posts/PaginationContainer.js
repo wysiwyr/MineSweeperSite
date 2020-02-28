@@ -14,16 +14,17 @@ const PaginationContainer = ({match, location}) => {
     if (!posts || loading) return null;
 
     const {username} = match.params;
-    const {page = 1, tag} = qs.parse(location.search, {
+    const {page = '1', tag, level} = qs.parse(location.search, {
         ignoreQueryPrefix: true,
     });
 
     return (
         <Pagination
-            page={page}
-            lastPage={lastPage}
+            page={parseInt(page, 10)}
+            lastPage={parseInt(lastPage, 10)}
             username={username}
             tag={tag}
+            level={level}
         />
     )
 };

@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch, useSelector, shallowEqual} from "react-redux";
 import {initializeGame, increaseOpenBlockNum, finishGame} from "../../modules/game";
 import GameBoard from "../../components/game/GameBoard";
 import {withRouter} from 'react-router-dom';
@@ -20,7 +20,7 @@ const GameBoardContainer = ({history}) => {
         size: game.size,
         mineNum: game.mineNum,
         openBlockNum: game.openBlockNum,
-    }));
+    }), shallowEqual);
 
     const onRestart = useCallback(() => {
         dispatch(initializeGame());
