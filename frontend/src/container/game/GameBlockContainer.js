@@ -22,12 +22,12 @@ const GameBlockContainer = ({space}) => {
     const onBlockOpen = useCallback(stringId => {
 
         const storeNearBlock = nearBlock.slice();
-        let id = parseInt(stringId, 10);
+        const id = parseInt(stringId, 10);
 
-        if (!(isFinish || space.isOpen)) {
-            if (space.val === 'X') {
+        if (!(isFinish || ground[id].isOpen)) {
+            if (ground[id].val === 'X') {
                 dispatch(finishGame('Game Over...'));
-            } else if (space.val === 0) {
+            } else if (ground[id].val === 0) {
                 let visited = new Array(size).fill(false);
                 let queue = [id];
                 let zeroBlock = [id];
@@ -76,12 +76,13 @@ const GameBlockContainer = ({space}) => {
                 dispatch(openBlock(id));
             }
         }
-    }, [dispatch, isFinish, ground, space, size, width, nearBlock]);
+    }, [dispatch, isFinish, ground, size, width, nearBlock]);
 
-    const onMouseDownAction = useCallback((e, id) => {
-        if (!(isFinish || ground[id].isOpen) && e.button === 2) {
+    const onMouseDownAction = useCallback(e => {
+        const id = parseInt(space.id);
+        if (!(isFinish || space.isOpen) && e.button === 2) {
             dispatch(setFlag(id));
-        } else if (!isFinish && ground[id].isOpen && e.button === 1) {
+        } else if (!isFinish && space.isOpen && e.button === 1) {
             let storeNearBlock = nearBlock.slice();
             let nearCloseBlock = [];
             let nearFlag = [];
@@ -114,7 +115,7 @@ const GameBlockContainer = ({space}) => {
                 }
             }
         }
-    }, [dispatch, isFinish, ground, size, width, nearBlock, onBlockOpen]);
+    }, [dispatch, isFinish, ground, space, size, width, nearBlock, onBlockOpen]);
 
     const onMouseUpAction = useCallback((e, id) => {
         if (!isFinish && ground[id].isOpen && e.button === 1) {
