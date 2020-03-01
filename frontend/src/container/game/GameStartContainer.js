@@ -9,6 +9,7 @@ const GameStartContainer = () => {
         level: game.level,
     }));
 
+    // 시작 버튼을 누르면 게임 데이터 생성
     const onStart = useCallback(()  => {
         let mineNum, size, width = 0;
         let ground = [];
@@ -79,6 +80,7 @@ const GameStartContainer = () => {
         );
     }, [dispatch, level]);
 
+    // 난이도 변경시 스토어에 저장
     const onSetLevel = useCallback(e=> {
         dispatch(setLevel(e.target.value))
     }, [dispatch]);

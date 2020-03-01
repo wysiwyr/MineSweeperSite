@@ -19,6 +19,7 @@ const GameBlockContainer = ({space}) => {
         nearBlock: game.nearBlock,
     }), shallowEqual);
 
+    // 블록을 여는 이벤트
     const onBlockOpen = useCallback(stringId => {
 
         const storeNearBlock = nearBlock.slice();
@@ -78,6 +79,7 @@ const GameBlockContainer = ({space}) => {
         }
     }, [dispatch, isFinish, ground, size, width, nearBlock]);
 
+    // 지뢰 위치를 설정하거나 주변 블록을 하이라이트할 때 사용
     const onMouseDownAction = useCallback(e => {
         const id = parseInt(space.id);
         if (!(isFinish || space.isOpen) && e.button === 2) {
@@ -117,6 +119,7 @@ const GameBlockContainer = ({space}) => {
         }
     }, [dispatch, isFinish, ground, space, size, width, nearBlock, onBlockOpen]);
 
+    // 지뢰 위치를 설정하거나 주변 블록을 하이라이트할 때 사용
     const onMouseUpAction = useCallback((e, id) => {
         if (!isFinish && ground[id].isOpen && e.button === 1) {
             let storeNearBlock = nearBlock.slice();

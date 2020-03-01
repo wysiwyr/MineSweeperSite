@@ -22,14 +22,17 @@ const GameBoardContainer = ({history}) => {
         openBlockNum: game.openBlockNum,
     }), shallowEqual);
 
+    // 재시작 버튼을 누르면 게임 초기화
     const onRestart = useCallback(() => {
         dispatch(initializeGame());
     }, [dispatch]);
 
+    // 게임을 클리어했을 때 기록 저장 페이지로 이동
     const onClear = useCallback(() => {
         history.push('/write');
     }, [history]);
 
+    // 열린 블록의 수가 증가하면 액션 실행
     useEffect(() => {
         const openBlock = ground.filter(space => space.isOpen === true);
         if (openBlock.length !== openBlockNum) {
@@ -37,6 +40,7 @@ const GameBoardContainer = ({history}) => {
         }
     }, [dispatch, ground, openBlockNum]);
 
+    // 게임 클리어 조건을 달성하면 액션 실행
     useEffect(() => {
         if (mineNum === size - openBlockNum && isStart && !isFinish) {
             dispatch(finishGame('Game Clear!!!'));

@@ -30,6 +30,7 @@ const GameBoard = ({onRestart, onClear}) => {
     const BoardRestart = styled.div`
         width: ${divWidth}px;
     `;
+
     const onRestartClick = () => {
         setRestartModal(true);
     };
