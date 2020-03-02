@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useCallback, useState} from "react";
 import {useSelector} from "react-redux";
 import styled from "styled-components";
 import GameBlockContainer from "../../container/game/GameBlockContainer";
@@ -9,6 +9,7 @@ import './GameBoard.scss'
 const GameBoard = ({onRestart, onClear}) => {
     const [clearModal, setClearModal] = useState(false);
     const [restartModal, setRestartModal] = useState(false);
+    const [tutorialModal, setTutorialModal] = useState(true);
     const {
         isFinish,
         isClear,
@@ -31,21 +32,25 @@ const GameBoard = ({onRestart, onClear}) => {
         width: ${divWidth}px;
     `;
 
-    const onRestartClick = () => {
+    const onTutorialClose = useCallback(() => {
+        setTutorialModal(false);
+    }, []);
+
+    const onRestartClick = useCallback(() => {
         setRestartModal(true);
-    };
+    },[]);
 
-    const onRestartCancel = () => {
+    const onRestartCancel = useCallback(() => {
         setRestartModal(false);
-    };
+    },[]);
 
-    const onClearClick = () => {
+    const onClearClick = useCallback(() => {
         setClearModal(true);
-    };
+    },[]);
 
-    const onClearCancel = () => {
+    const onClearCancel = useCallback(() => {
         setClearModal(false);
-    };
+    },[]);
 
     return (
         <div id={"board-root"}>

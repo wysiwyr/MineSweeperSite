@@ -73,7 +73,7 @@ export default handleActions(
         [SET_FLAG]: (state, {payload: id}) =>
             produce(state, draft => {
                 draft.ground[id].flagSet = !draft.ground[id].flagSet;
-                draft.ground[id].isHighlight = false;h
+                draft.ground[id].isHighlight = false;
             }),
         [HIGHLIGHT_ON]: (state, {payload: id}) =>
             produce(state, draft => {
