@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "../common/Button";
-import './GameStart.scss'
+import "./GameStart.scss"
 
 const GameStart = ({onStart, onSetLevel}) => {
 

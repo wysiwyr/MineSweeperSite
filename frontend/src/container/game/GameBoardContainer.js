@@ -1,23 +1,27 @@
 import React, {useCallback, useEffect} from "react";
 import {useDispatch, useSelector, shallowEqual} from "react-redux";
+import {withRouter} from "react-router-dom";
 import {initializeGame, increaseOpenBlockNum, finishGame} from "../../modules/game";
 import GameBoard from "../../components/game/GameBoard";
-import {withRouter} from 'react-router-dom';
 
 const GameBoardContainer = ({history}) => {
     const dispatch = useDispatch();
     const {
         isStart,
+        isClear,
         isFinish,
         ground,
         size,
+        width,
         mineNum,
         openBlockNum,
     } = useSelector(({game}) => ({
         isStart: game.isStart,
+        isClear: game.isClear,
         isFinish: game.isFinish,
         ground: game.ground,
         size: game.size,
+        width: game.width,
         mineNum: game.mineNum,
         openBlockNum: game.openBlockNum,
     }), shallowEqual);
@@ -45,14 +49,20 @@ const GameBoardContainer = ({history}) => {
         if (mineNum === size - openBlockNum && isStart && !isFinish) {
             dispatch(finishGame('Game Clear!!!'));
         }
-    }, [dispatch, isStart, isFinish, ground, size, mineNum, openBlockNum]);
+    }, [dispatch, isStart, isFinish, size, mineNum, openBlockNum]);
 
     return (
         <GameBoard
+            isFinish={isFinish}
+            isClear={isClear}
+            ground={ground}
+            width={width}
+            mineNum={mineNum}
+            openBlockNum={openBlockNum}
             onRestart={onRestart}
             onClear={onClear}
         />
     );
 };
 
-export default withRouter(GameBoardContainer);
+export default React.memo(withRouter(GameBoardContainer));

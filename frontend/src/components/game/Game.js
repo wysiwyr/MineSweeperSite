@@ -1,5 +1,5 @@
 import React from "react";
-import './Game.scss'
+import "./Game.scss"
 
 const Game = ({content}) => {
 

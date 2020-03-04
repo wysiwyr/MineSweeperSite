@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import {useDispatch, useSelector, shallowEqual} from "react-redux";
 import {initializeGame} from "../../modules/game";
-import {withRouter} from 'react-router-dom';
+import {withRouter} from "react-router-dom";
 import Game from "../../components/game/Game";
 import GameStartContainer from "../../container/game/GameStartContainer";
 import GameBoardContainer from "../../container/game/GameBoardContainer";
@@ -19,7 +19,10 @@ const GameContainer = ({history}) => {
             alert('올바른 접근이 아닙니다!!!');
             history.push('/');
         }
-        dispatch(initializeGame())
+        dispatch(initializeGame());
+        return() => {
+            dispatch(initializeGame());
+        }
     }, [dispatch, user, history]);
 
     return (

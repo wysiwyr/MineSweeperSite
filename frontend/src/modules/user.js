@@ -1,7 +1,7 @@
-import {createAction, handleActions} from 'redux-actions';
-import {takeLatest, call} from 'redux-saga/effects';
-import * as authAPI from '../lib/api/auth';
+import {createAction, handleActions} from "redux-actions";
+import {takeLatest, call} from "redux-saga/effects";
 import createRequestSaga, {createRequsetActionType} from "../lib/createRequestSaga";
+import * as authAPI from "../lib/api/auth";
 
 const TEMP_SET_USER = 'user/TEMP_SET_USER'; // 새로고침 이후 임시 로그인 처리
 // 회원 정보 확인
@@ -26,6 +26,7 @@ function* logoutSaga() {
     try {
         yield call(authAPI.logout); // logout api 호출
         localStorage.removeItem('user'); // localStorage에서 user를 제거
+        localStorage.removeItem('tutorial'); // localStorage에서 tutorial을 제거
     } catch (e) {
         console.log(e);
     }

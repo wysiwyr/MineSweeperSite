@@ -1,20 +1,18 @@
-import React, {useCallback} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import React, {useRef, useCallback} from "react";
+import {useDispatch} from "react-redux";
 import {setLevel, startGame} from "../../modules/game";
 import GameStart from "../../components/game/GameStart";
 
 const GameStartContainer = () => {
+    const levelSelect = useRef('쉬움');
     const dispatch = useDispatch();
-    const {level} = useSelector(({game}) => ({
-        level: game.level,
-    }));
 
     // 시작 버튼을 누르면 게임 데이터 생성
     const onStart = useCallback(()  => {
         let mineNum, size, width = 0;
         let ground = [];
 
-        switch (level) {
+        switch (levelSelect.current) {
             case '쉬움':
                 mineNum = 10;
                 size = 80;
@@ -78,10 +76,11 @@ const GameStartContainer = () => {
                 mineNum,
             })
         );
-    }, [dispatch, level]);
+    }, [dispatch]);
 
     // 난이도 변경시 스토어에 저장
     const onSetLevel = useCallback(e=> {
+        levelSelect.current = e.target.value;
         dispatch(setLevel(e.target.value))
     }, [dispatch]);
 

@@ -1,8 +1,8 @@
-import {createAction, handleActions} from 'redux-actions';
+import {createAction, handleActions} from "redux-actions";
 import produce from "immer";
-import {takeLatest} from 'redux-saga/effects';
+import {takeLatest} from "redux-saga/effects";
 import createRequestSaga, {createRequsetActionType} from "../lib/createRequestSaga";
-import * as authAPI from '../lib/api/auth';
+import * as authAPI from "../lib/api/auth";
 
 const CHANGE_FIELD = 'auth/CHANGE_FIELD';
 const ENTER_FORM = 'auth/ENTER_FORM';

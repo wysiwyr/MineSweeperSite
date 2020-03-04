@@ -1,22 +1,22 @@
 import React from "react";
-import classNames from 'classnames';
-import './GameBlock.scss'
+import classNames from "classnames";
+import "./GameBlock.scss"
 
-const GameBlock = ({space, onBlockOpen, onMouseDownAction, onMouseUpAction}) => {
+const GameBlock = ({id, val, isOpen, flagSet, isHighlight, onBlockOpen, onMouseDownAction, onMouseUpAction}) => {
     return (
         <button
-            id={space.id}
-            className={classNames('block', space.isOpen ? 'open-block val-' + space.val : 'closed-block', space.isHighlight && 'highlight')}
-            onClick={() => onBlockOpen(space.id)}
-            onMouseDown={e => onMouseDownAction(e, space.id)}
-            onMouseUp={e => onMouseUpAction(e, space.id)}
+            id={id}
+            className={classNames('block', isOpen ? 'open-block val-' + val : 'closed-block', isHighlight && 'highlight')}
+            onClick={() => onBlockOpen(id)}
+            onMouseDown={e => onMouseDownAction(e, id)}
+            onMouseUp={e => onMouseUpAction(e, id)}
             onContextMenu={e => e.preventDefault()}
             onAuxClick={e => e.preventDefault()}
             onWheel={e => e.preventDefault()}
         >
-            {space.isOpen ? space.val > 0 ? space.val : space.val === 'X' && <img src="images/mine.png" alt="지뢰"/> : space.flagSet && '✘' }
+            {isOpen ? val > 0 ? val : val === 'X' && <img src="images/mine.png" alt="지뢰"/> : flagSet && '✘'}
         </button>
     )
 };
 
-export default GameBlock;
+export default React.memo(GameBlock);

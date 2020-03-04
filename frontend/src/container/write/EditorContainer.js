@@ -1,8 +1,8 @@
 import React, {useEffect, useCallback} from "react";
-import Editor from "../../components/write/Editor";
 import {useSelector, useDispatch} from "react-redux";
-import {initialize, changeField} from "../../modules/write";
 import {withRouter} from 'react-router-dom';
+import Editor from "../../components/write/Editor";
+import {initialize, changeField} from "../../modules/write";
 
 const EditorContainer = ({history}) => {
     const dispatch = useDispatch();

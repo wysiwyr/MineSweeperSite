@@ -1,5 +1,5 @@
-import React from 'react';
-import {Route} from 'react-router-dom';
+import React from "react";
+import {Route} from "react-router-dom";
 import PostListPage from "./pages/PostListPage";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import HeaderContainer from "../container/common/HeaderContainer";
 import GameContainer from "../container/game/GameContainer";
 

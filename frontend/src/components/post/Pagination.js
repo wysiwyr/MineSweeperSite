@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import qs from 'qs';
+import qs from "qs";
 import Button from "../common/Button";
 
 const StyledPagination = styled.div`

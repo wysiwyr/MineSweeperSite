@@ -1,5 +1,5 @@
-import Joi from '@hapi/joi';
-import User from '../../models/user';
+import Joi from "@hapi/joi";
+import User from "../../models/user";
 
 /*
 회원가입

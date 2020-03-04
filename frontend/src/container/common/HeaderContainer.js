@@ -1,8 +1,8 @@
 import React, {useCallback} from "react";
 import {useSelector, useDispatch, shallowEqual} from "react-redux";
+import {withRouter} from 'react-router-dom';
 import Header from "../../components/common/Header";
 import {logout} from "../../modules/user";
-import {withRouter} from 'react-router-dom';
 
 const HeaderContainer = ({history}) => {
     const {user} = useSelector(({user}) => ({user: user.user}), shallowEqual);

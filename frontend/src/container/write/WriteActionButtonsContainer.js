@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import {useSelector, useDispatch} from "react-redux";
-import {withRouter} from 'react-router-dom';
+import {withRouter} from "react-router-dom";
 import {writePost, updatePost} from "../../modules/write";
 import WriteActionButtons from "../../components/write/WriteActionButton";
 

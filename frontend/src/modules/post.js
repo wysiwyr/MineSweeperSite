@@ -1,7 +1,7 @@
-import {createAction, handleActions} from 'redux-actions';
+import {createAction, handleActions} from "redux-actions";
+import {takeLatest} from "redux-saga/effects";
 import createRequestSaga, {createRequsetActionType} from "../lib/createRequestSaga";
-import * as postAPI from '../lib/api/posts';
-import {takeLatest} from 'redux-saga/effects';
+import * as postAPI from "../lib/api/posts";
 
 const [
     READ_POST,
