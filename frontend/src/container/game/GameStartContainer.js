@@ -24,7 +24,7 @@ const GameStartContainer = () => {
                 width = 18;
                 break;
             case '어려움':
-                mineNum = 100;
+                mineNum = 90;
                 size = 480;
                 width = 24;
                 break;
