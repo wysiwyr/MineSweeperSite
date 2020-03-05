@@ -19,7 +19,7 @@ const StyledSubInfo = styled.div`
     }
 `;
 
-const SubInfo = ({username, level, time, publishedDate, hasMarginTop}) => {
+const SubInfo = ({username, time, publishedDate, hasMarginTop}) => {
     return (
         <StyledSubInfo hasMarginTop={hasMarginTop}>
             <span>
@@ -27,7 +27,6 @@ const SubInfo = ({username, level, time, publishedDate, hasMarginTop}) => {
                     <Link to={`/@${username}`}>{username}</Link>
                 </b>
             </span>
-            <span><Link to={`/?level=${level}`}>난이도: {level}</Link></span>
             <span>클리어 타임: {time}</span>
             <span>플레이 날짜: {new Date(publishedDate).toLocaleDateString()}</span>
         </StyledSubInfo>

@@ -2,11 +2,15 @@ import React from "react";
 import classNames from "classnames";
 import "./GameBlock.scss"
 
-const GameBlock = ({id, val, isOpen, flagSet, isHighlight, onBlockOpen, onMouseDownAction, onMouseUpAction}) => {
+const GameBlock = ({id, val, isOpen, width, flagSet, isHighlight, onBlockOpen, onMouseDownAction, onMouseUpAction}) => {
     return (
         <button
             id={id}
-            className={classNames('block', isOpen ? 'open-block val-' + val : 'closed-block', isHighlight && 'highlight')}
+            className={classNames(
+                'block',
+                isOpen ? 'open-block val-' + val : 'closed-block',
+                isHighlight && 'highlight',
+                width === 18 ? 'normal' : width === 24 && 'hard')}
             onClick={() => onBlockOpen(id)}
             onMouseDown={e => onMouseDownAction(e, id)}
             onMouseUp={e => onMouseUpAction(e, id)}

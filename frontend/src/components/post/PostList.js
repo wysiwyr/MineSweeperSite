@@ -37,6 +37,14 @@ const StyledPostItem = styled.div`
     p {
        margin-top: 1.5rem;
     }
+    .level {
+        font-weight: bold;
+        color: ${palette.cyan[6]};
+    }
+    
+    @media (max-width: 450px) {
+        font-size:
+    }
 `;
 
 const PostItem = ({post}) => {
@@ -51,10 +59,12 @@ const PostItem = ({post}) => {
             </h2>
             <SubInfo
                 username={user.username}
-                level={level}
                 time={time}
                 publishedDate={publishedDate}
             />
+            <span className={'level'}>
+                <Link to={`/?level=${level}`}>난이도: {level}</Link>
+            </span>
             <Tags
                 tags={tags}
             />

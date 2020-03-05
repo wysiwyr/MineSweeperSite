@@ -13,6 +13,10 @@ const buttonStyle = css`
     outline: none;
     cursor: pointer;
     
+    @media (max-width: 550px) {
+        font-size: 0.8rem;
+    }
+    
     background: ${palette.gray[8]};
     &:hover {
         background: ${palette.gray[6]};

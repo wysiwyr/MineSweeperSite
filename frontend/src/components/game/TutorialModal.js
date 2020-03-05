@@ -22,12 +22,12 @@ const StyledModal = styled.div`
     padding: 1.5rem;
     border-radius: 4px;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.125);
+    text-align: center;
     h2 {
         margin-top: 0;
         margin-bottom: 1rem;
     }
     .tutorial_image {
-        text-align: center;
         margin-bottom: 1rem;
         .disabled {
             display: none;
@@ -44,10 +44,17 @@ const StyledModal = styled.div`
         justify-content: flex-end;
         margin: 0;
     }
-`;
-
-const StyledButton = styled(Button)`
-    height: 2rem;
+    
+    @media (max-width: 750px) {
+        font-size: 0.8rem;
+        h2 {
+            font-size: 1.2rem;
+        }
+        width: 300px;
+        & img {
+            width: 250px;
+        }
+    }
 `;
 
 const TutorialModal = ({visible, onCancel}) => {
@@ -59,7 +66,7 @@ const TutorialModal = ({visible, onCancel}) => {
         setStep(step => step += 1);
     }, []);
 
-    if (!visible || localStorage.getItem('tutorial') === 'done') return null;
+    if (!visible ) return null;
     return (
         <Fullscreen>
             <StyledModal>
@@ -105,9 +112,9 @@ const TutorialModal = ({visible, onCancel}) => {
                     </Button>
                 </div>
                 <div className={"tutorial_button"}>
-                    <StyledButton onClick={onCancel}>
+                    <Button onClick={onCancel}>
                         창 닫기
-                    </StyledButton>
+                    </Button>
                 </div>
             </StyledModal>
         </Fullscreen>

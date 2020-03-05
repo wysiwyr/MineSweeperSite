@@ -21,6 +21,9 @@ const Wrapper = styled(Responsive)`
         font-size: 1.125rem;
         font-weight: 800;
         letter-spacing: 2px;
+        @media (max-width: 550px) {
+            font-size: 1rem;
+        }
     }
     .right {
         display: flex;
@@ -39,6 +42,9 @@ const Spacer = styled.div`
 const UserInfo = styled.div`
     font-weight: 800;
     margin-right: 1rem;
+    @media (max-width: 550px) {
+        font-size: 0.8rem;
+    }
 `;
 
 const Header = ({user, onLogout}) => {

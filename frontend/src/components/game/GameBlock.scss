@@ -4,42 +4,130 @@
   margin: 0;
   padding: 0;
   text-align: center;
-  font-size: 30px;
   font-weight: bold;
-  width: 30px;
-  height: 30px;
-  line-height: 30px;
+  font-size: 2rem;
+  width: 2rem;
+  height: 2rem;
+  line-height: 2rem;
   border: none;
   cursor: pointer;
+
+  &.normal {
+
+    @media (max-width: 720px) {
+      font-size: 1.8rem;
+      width: 1.8rem;
+      height: 1.8rem;
+      line-height: 1.8rem;
+
+      & > img {
+        width: 1.8rem;
+        height: 1.8rem;
+      }
+    }
+
+    @media (max-width: 550px) {
+      font-size: 1.2rem;
+      width: 1.2rem;
+      height: 1.2rem;
+      line-height: 1.2rem;
+
+      & > img {
+        width: 1.2rem;
+        height: 1.2rem;
+      }
+    }
+  }
+
+  &.hard {
+
+    @media all and (max-width: 1440px) {
+      font-size: 1.8rem;
+      width: 1.8rem;
+      height: 1.8rem;
+      line-height: 1.8rem;
+
+      & > img {
+        width: 1.8rem;
+        height: 1.8rem;
+      }
+    }
+
+    @media all and (max-width: 1024px) {
+      font-size: 1.6rem;
+      width: 1.6rem;
+      height: 1.6rem;
+      line-height: 1.6rem;
+
+      & > img {
+        width: 1.6rem;
+        height: 1.6rem;
+      }
+    }
+
+    @media all and (max-width: 650px) {
+      font-size: 1.2rem;
+      width: 1.2rem;
+      height: 1.2rem;
+      line-height: 1.2rem;
+
+      & > img {
+        width: 1.2rem;
+        height: 1.2rem;
+      }
+    }
+
+    @media all and (max-width: 450px) {
+      font-size: 0.8rem;
+      width: 0.8rem;
+      height: 0.8rem;
+      line-height: 0.8rem;
+
+      & > img {
+        width: 0.8rem;
+        height: 0.8rem;
+      }
+    }
+  }
+
   &.open-block {
     background: #e9ecef;
-    &.val-1{
+
+    &.val-1 {
       color: #1976d2;
     }
-    &.val-2{
+
+    &.val-2 {
       color: #388e3c;
     }
-    &.val-3{
+
+    &.val-3 {
       color: #d32f2f;
     }
-    &.val-4{
+
+    &.val-4 {
       color: #7b1fa1;
     }
-    &.val-5{
+
+    &.val-5 {
       color: #ffcd1a;
     }
   }
+
   &.closed-block {
     background: #495057;
     color: #be3333;
+
     &:hover {
       background: #868e96;
     }
   }
+
   & > img {
-    width: 30px;
-    height: 30px;
+    width: 2rem;
+    height: 2rem;
   }
+
   &.highlight {
     background: #868e96;
   }

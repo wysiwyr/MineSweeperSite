@@ -1,15 +1,10 @@
 import React, {useCallback} from "react";
-import {useDispatch, useSelector, shallowEqual} from "react-redux";
+import {useDispatch} from "react-redux";
 import {finishGame, openBlock, openNearBlock, setFlag, doChord, highlightOff} from "../../modules/game";
 import GameBlock from "../../components/game/GameBlock";
 
-const GameBlockContainer = ({id, val, isOpen, flagSet, isHighlight}) => {
+const GameBlockContainer = ({isFinish, id, val, width, isOpen, flagSet, isHighlight}) => {
     const dispatch = useDispatch();
-    const {
-        isFinish,
-    } = useSelector(({game}) => ({
-        isFinish: game.isFinish,
-    }), shallowEqual);
 
     // 블록을 여는 이벤트
     const onBlockOpen = useCallback(() => {
@@ -45,6 +40,7 @@ const GameBlockContainer = ({id, val, isOpen, flagSet, isHighlight}) => {
         <GameBlock
             id={id}
             val={val}
+            width={width}
             isOpen={isOpen}
             flagSet={flagSet}
             isHighlight={isHighlight}

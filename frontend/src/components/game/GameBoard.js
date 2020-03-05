@@ -1,5 +1,6 @@
 import React, {useCallback, useState} from "react";
 import styled from "styled-components";
+import classNames from "classnames";
 import GameBlockContainer from "../../container/game/GameBlockContainer";
 import AskRestartModal from "./AskRestartModal";
 import TutorialModal from "./TutorialModal";
@@ -10,13 +11,12 @@ const GameBoard = ({isFinish, isClear, ground, width, mineNum, onRestart, onClea
     const [clearModal, setClearModal] = useState(false);
     const [restartModal, setRestartModal] = useState(false);
     const [tutorialModal, setTutorialModal] = useState(true);
-    const divWidth = parseInt(width, 10) * 30;
-    const Board = styled.div`
-            display: inline-block;
-            width: ${divWidth}px;
-        `;
+
     const BoardRestart = styled.div`
-        width: ${divWidth}px;
+            width: calc(${width} * 2rem);
+            @media all and (max-width: 1440px) {
+                width: calc(${width} * 1.6rem);
+            }
     `;
 
     const onTutorialClose = useCallback(() => {
@@ -43,27 +43,29 @@ const GameBoard = ({isFinish, isClear, ground, width, mineNum, onRestart, onClea
     return (
         <div id={"board-root"}>
             <div id={"board-minNum-div"}>
-                <h2>{isClear ? isClear : '지뢰 갯수 : ' + mineNum + '개'}</h2>
+                <h2>{isClear ? isClear : '지뢰 개수 : ' + mineNum + '개'}</h2>
             </div>
-            <Board>
+            <div className={classNames('board', width === 18 ? 'normal' : width === 24 && 'hard')}>
                 {ground.map(space => (
                         <GameBlockContainer
                             key={space.id}
+                            isFinish={isFinish}
                             id={space.id}
                             val={space.val}
+                            width={width}
                             isOpen={space.isOpen}
                             flagSet={space.flagSet}
                             isHighlight={space.isHighlight}
                         />
                     ))}
-            </Board>
+            </div>
             <TutorialModal
                 visible={tutorialModal}
                 onCancel={onTutorialClose}
             />
             {isFinish
             &&
-            <BoardRestart id={"board-restart"}>
+            <div className={classNames('board-restart')}>
                 <Button onClick={onRestartClick}>
                     다시 시작
                 </Button>
@@ -89,7 +91,7 @@ const GameBoard = ({isFinish, isClear, ground, width, mineNum, onRestart, onClea
                     </>
                 )}
 
-            </BoardRestart>}
+            </div>}
         </div>
     )
 };
