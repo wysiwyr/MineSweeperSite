@@ -42,12 +42,8 @@ const GameBoard = ({isFinish, isClear, ground, width, mineNum, onRestart, onClea
                         <GameBlockContainer
                             key={space.id}
                             isFinish={isFinish}
-                            id={space.id}
-                            val={space.val}
+                            space={space}
                             width={width}
-                            isOpen={space.isOpen}
-                            flagSet={space.flagSet}
-                            isHighlight={space.isHighlight}
                         />
                     ))}
             </div>
@@ -88,4 +84,6 @@ const GameBoard = ({isFinish, isClear, ground, width, mineNum, onRestart, onClea
     )
 };
 
-export default React.memo(GameBoard);
+export default React.memo(GameBoard, (prevProps, nextProps) => {
+    return prevProps.ground === nextProps.ground
+});

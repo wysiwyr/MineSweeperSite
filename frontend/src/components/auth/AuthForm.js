@@ -107,4 +107,4 @@ const AuthForm = ({type, form, onChange, onSubmit, error}) => {
     );
 };
 
-export default React.memo(AuthForm);
+export default AuthForm;

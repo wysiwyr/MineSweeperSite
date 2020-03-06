@@ -79,7 +79,7 @@ const GameStartContainer = () => {
     }, [dispatch]);
 
     // 난이도 변경시 스토어에 저장
-    const onSetLevel = useCallback(e=> {
+    const onLevelChange = useCallback(e=> {
         levelSelect.current = e.target.value;
         dispatch(setLevel(e.target.value))
     }, [dispatch]);
@@ -87,7 +87,7 @@ const GameStartContainer = () => {
     return (
         <GameStart
             onStart={onStart}
-            onSetLevel={onSetLevel}
+            onLevelChange={onLevelChange}
         />
     );
 };

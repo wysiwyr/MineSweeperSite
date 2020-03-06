@@ -68,7 +68,7 @@ const LoginForm = ({history}) => {
             try {
                 localStorage.setItem('user', JSON.stringify(user));
             } catch (e) {
-                console.log('localStorage is not working');
+                console.log('localStorage is not working...');
             }
         }
 
@@ -85,4 +85,4 @@ const LoginForm = ({history}) => {
     )
 };
 
-export default React.memo(withRouter(LoginForm));
+export default withRouter(LoginForm);

@@ -2,7 +2,7 @@ import React from "react";
 import Button from "../common/Button";
 import "./GameStart.scss"
 
-const GameStart = ({onStart, onSetLevel}) => {
+const GameStart = ({onStart, onLevelChange}) => {
 
     return (
         <div id={"start-root"}>
@@ -12,8 +12,7 @@ const GameStart = ({onStart, onSetLevel}) => {
                 </label>
                 <select
                     name={"level"}
-                    id={"level"}
-                    onChange={onSetLevel}
+                    onChange={onLevelChange}
                 >
                     <option value={"쉬움"}>쉬움</option>
                     <option value={"보통"}>보통</option>

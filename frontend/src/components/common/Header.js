@@ -47,7 +47,8 @@ const UserInfo = styled.div`
     }
 `;
 
-const Header = ({user, onLogout}) => {
+const Header = ({onLogout}) => {
+    const user = JSON.parse(localStorage.getItem('user'));
     return (
         <>
             <StyledHeader>

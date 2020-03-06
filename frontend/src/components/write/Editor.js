@@ -1,4 +1,4 @@
-import React, {useRef, useEffect} from "react";
+import React, {useRef, useEffect, useCallback} from "react";
 import Quill from "quill";
 import "quill/dist/quill.bubble.css";
 import styled from "styled-components";
@@ -44,6 +44,7 @@ const QuillWrapper = styled.div`
 const Editor = ({title, body, level, time, onChangeField}) => {
     const quillElement = useRef(null); // Quill을 적용할 DivElement를 설정
     const quillIstance = useRef(null); // Quill 인스턴스를 설정
+    const mounted = useRef(false); // 기록을 수정하는 경우 컴포넌트가 마운트 되었는지 확인하는 변수
 
     useEffect(() => {
         quillIstance.current = new Quill(quillElement.current, {
@@ -70,16 +71,16 @@ const Editor = ({title, body, level, time, onChangeField}) => {
         })
     }, [onChangeField]);
 
-    const mounted = useRef(false);
+    // 컴포넌트가 처음 마운트 될 때 body 값을 입력한다.
     useEffect(() => {
         if (mounted.current) return;
         mounted.current = true;
         quillIstance.current.root.innerHTML = body;
     }, [body]);
 
-    const onChangeTitle = e => {
+    const onChangeTitle = useCallback(e => {
        onChangeField({key: 'title', value: e.target.value});
-    };
+    }, [onChangeField]);
 
     return (
         <StyledEditor>

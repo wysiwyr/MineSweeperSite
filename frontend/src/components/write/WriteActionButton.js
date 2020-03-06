@@ -31,4 +31,4 @@ const WriteActionButtons = ({onCancel, onPublished, isEdit}) => {
     )
 };
 
-export default WriteActionButtons;
+export default React.memo(WriteActionButtons);

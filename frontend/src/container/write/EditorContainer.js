@@ -1,5 +1,5 @@
 import React, {useEffect, useCallback} from "react";
-import {useSelector, useDispatch} from "react-redux";
+import {useSelector, useDispatch, shallowEqual} from "react-redux";
 import {withRouter} from 'react-router-dom';
 import Editor from "../../components/write/Editor";
 import {initialize, changeField} from "../../modules/write";
@@ -12,7 +12,7 @@ const EditorContainer = ({history}) => {
         body: write.body,
         level: game.level ? game.level : write.originalLevel,
         time: game.time ? game.time : write.originalTime,
-    }));
+    }), shallowEqual);
     const onChangeField = useCallback(payload => dispatch(changeField(payload)),
         [dispatch]);
 
@@ -38,4 +38,4 @@ const EditorContainer = ({history}) => {
     )
 };
 
-export default React.memo(withRouter(EditorContainer));
+export default withRouter(EditorContainer);

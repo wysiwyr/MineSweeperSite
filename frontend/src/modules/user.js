@@ -18,7 +18,7 @@ function checkFailureSaga() {
     try {
         localStorage.removeItem('user'); // localStorage에서 user를 제거
     } catch (e) {
-        console.log('localStorage is not working');
+        console.log('localStorage is not working...');
     }
 }
 
@@ -28,7 +28,7 @@ function* logoutSaga() {
         localStorage.removeItem('user'); // localStorage에서 user를 제거
         localStorage.removeItem('tutorial'); // localStorage에서 tutorial을 제거
     } catch (e) {
-        console.log(e);
+        console.log('localStorage is not working...');
     }
 }
 

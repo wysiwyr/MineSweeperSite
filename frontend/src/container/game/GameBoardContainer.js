@@ -65,4 +65,4 @@ const GameBoardContainer = ({history}) => {
     );
 };
 
-export default React.memo(withRouter(GameBoardContainer));
+export default withRouter(GameBoardContainer);

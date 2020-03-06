@@ -1,5 +1,5 @@
-import React, {useEffect} from "react";
-import {useSelector, useDispatch} from "react-redux";
+import React, {useCallback, useEffect} from "react";
+import {useSelector, useDispatch, shallowEqual} from "react-redux";
 import {withRouter} from "react-router-dom";
 import {writePost, updatePost} from "../../modules/write";
 import WriteActionButtons from "../../components/write/WriteActionButton";
@@ -15,9 +15,9 @@ const WriteActionButtonsContainer = ({history}) => {
         originalPostId: write.originalPostId,
         level: game.level,
         time: game.time,
-    }));
+    }), shallowEqual);
 
-    const onPublish = () => {
+    const onPublish = useCallback(() => {
         if (originalPostId) {
             dispatch(
                 updatePost(
@@ -40,11 +40,11 @@ const WriteActionButtonsContainer = ({history}) => {
                 tags
             }),
         );
-    };
+    }, [dispatch, originalPostId, title, level, time, body, tags]);
 
-    const onCancel = () => {
+    const onCancel = useCallback(() => {
         history.goBack();
-    };
+    }, [history]);
 
     useEffect(() => {
         if (post) {

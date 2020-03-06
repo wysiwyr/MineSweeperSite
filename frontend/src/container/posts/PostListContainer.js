@@ -1,20 +1,46 @@
-import React, {useEffect} from "react";
+import React, {useCallback, useEffect, useRef} from "react";
 import qs from "qs";
 import {withRouter} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch, useSelector, shallowEqual} from "react-redux";
 import PostList from "../../components/post/PostList";
 import {listPosts} from "../../modules/posts";
 
-const PostListContainer = ({match, location}) => {
+const PostListContainer = ({match, location, history}) => {
+    const searchType = useRef('username');
+    const searchFor = useRef('');
     const dispatch = useDispatch();
-    const {posts, error, loading, user} = useSelector(
-        ({posts, loading, user}) => ({
+    const {posts, error, loading} = useSelector(
+        ({posts, loading}) => ({
             posts: posts.posts,
             error: posts.error,
             loading: loading['posts/LIST_POSTS'],
-            user: user.user,
-        }),
-    );
+        }), shallowEqual);
+
+    const onSearchSubmit = useCallback((e) => {
+        e.preventDefault();
+        if (searchType.current === 'username') {
+            history.push(`/@${searchFor.current}`);
+        } else {
+            const query = qs.stringify({[searchType.current]: searchFor.current});
+            history.push(`/?${query}`);
+        }
+    }, [history]);
+
+    const onSearchTypeChange = useCallback((e) => {
+        searchType.current = e.target.value;
+    }, []);
+
+    const onSearchForChange = useCallback((e) => {
+        searchFor.current = e.target.value;
+    }, []);
+
+    useEffect(() => {
+        console.log(match.url);
+        if (match.url === '/') {
+            searchType.current = 'username';
+            searchFor.current = '';
+        }
+    });
 
     useEffect(() => {
         const {username} = match.params;
@@ -29,7 +55,9 @@ const PostListContainer = ({match, location}) => {
             posts={posts}
             error={error}
             loading={loading}
-            showStartButton={user}
+            onSearchSubmit={onSearchSubmit}
+            onSearchTypeChange={onSearchTypeChange}
+            onSearchForChange={onSearchForChange}
         />
     );
 };

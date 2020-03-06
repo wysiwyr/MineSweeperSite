@@ -73,15 +73,33 @@ const PostItem = ({post}) => {
     )
 };
 
-const PostList = ({posts, error, loading, showStartButton}) => {
+const PostList = ({posts, error, loading, onSearchSubmit, onSearchTypeChange, onSearchForChange}) => {
     if (error) {
         return <StyledPostList>에러가 발생했습니다!</StyledPostList>
     }
 
     return (
         <StyledPostList>
+            <div>
+                <form onSubmit={onSearchSubmit}>
+                    <select
+                        name="searchType"
+                        onChange={onSearchTypeChange}
+                    >
+                        <option value="username">아이디</option>
+                        <option value="level">난이도</option>
+                        <option value="tag">태그</option>
+                    </select>
+                    <input
+                        type="text"
+                        name={"searchFor"}
+                        placeholder={"검색할 내용을 입력해주세요!!"}
+                        onChange={onSearchForChange}
+                    />
+                </form>
+            </div>
             <GameStartButtonWrapper>
-                {showStartButton && (
+                {localStorage.getItem('user') && (
                     <Button to={"/game"} cyan>
                         게임 시작!
                     </Button>
@@ -98,5 +116,4 @@ const PostList = ({posts, error, loading, showStartButton}) => {
     )
 };
 
-export default PostList;
-
+export default React.memo(PostList);

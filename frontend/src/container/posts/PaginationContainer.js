@@ -1,5 +1,5 @@
 import React from "react";
-import {useSelector} from "react-redux";
+import {useSelector, shallowEqual} from "react-redux";
 import {withRouter} from "react-router-dom";
 import qs from "qs";
 import Pagination from "../../components/post/Pagination";
@@ -9,7 +9,7 @@ const PaginationContainer = ({match, location}) => {
         posts: posts.posts,
         loading: loading['posts/LIST_POSTS'],
         lastPage: posts.lastPage,
-    }));
+    }), shallowEqual);
 
     if (!posts || loading) return null;
 
