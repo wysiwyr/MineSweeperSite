@@ -103,4 +103,4 @@ const Editor = ({title, body, level, time, onChangeField}) => {
     )
 };
 
-export default Editor;
+export default React.memo(Editor);

@@ -1,5 +1,4 @@
 import React, {useCallback, useState} from "react";
-import styled from "styled-components";
 import classNames from "classnames";
 import GameBlockContainer from "../../container/game/GameBlockContainer";
 import AskRestartModal from "./AskRestartModal";
@@ -11,13 +10,6 @@ const GameBoard = ({isFinish, isClear, ground, width, mineNum, onRestart, onClea
     const [clearModal, setClearModal] = useState(false);
     const [restartModal, setRestartModal] = useState(false);
     const [tutorialModal, setTutorialModal] = useState(true);
-
-    const BoardRestart = styled.div`
-            width: calc(${width} * 2rem);
-            @media all and (max-width: 1440px) {
-                width: calc(${width} * 1.6rem);
-            }
-    `;
 
     const onTutorialClose = useCallback(() => {
         localStorage.setItem('tutorial', 'done'); // localStorage에 tutorial 완료 데이터 추가

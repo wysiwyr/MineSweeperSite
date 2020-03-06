@@ -20,9 +20,6 @@ const GameContainer = ({history}) => {
             history.push('/');
         }
         dispatch(initializeGame());
-        return() => {
-            dispatch(initializeGame());
-        }
     }, [dispatch, user, history]);
 
     return (

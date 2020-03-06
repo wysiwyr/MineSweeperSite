@@ -66,7 +66,7 @@ const TutorialModal = ({visible, onCancel}) => {
         setStep(step => step += 1);
     }, []);
 
-    if (!visible ) return null;
+    if (!visible || localStorage.getItem('tutorial') === 'done') return null;
     return (
         <Fullscreen>
             <StyledModal>

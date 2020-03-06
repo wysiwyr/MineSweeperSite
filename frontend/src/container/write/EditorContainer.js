@@ -11,7 +11,7 @@ const EditorContainer = ({history}) => {
         title: write.title,
         body: write.body,
         level: game.level ? game.level : write.originalLevel,
-        time: game.time ? game.time: write.originalTime,
+        time: game.time ? game.time : write.originalTime,
     }));
     const onChangeField = useCallback(payload => dispatch(changeField(payload)),
         [dispatch]);
@@ -38,4 +38,4 @@ const EditorContainer = ({history}) => {
     )
 };
 
-export default withRouter(EditorContainer);
+export default React.memo(withRouter(EditorContainer));
