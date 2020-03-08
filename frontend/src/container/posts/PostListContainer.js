@@ -7,7 +7,9 @@ import {listPosts} from "../../modules/posts";
 
 const PostListContainer = ({match, location, history}) => {
     const searchType = useRef('username');
+    const searchTypeInput = useRef();
     const searchFor = useRef('');
+    const searchForInput = useRef();
     const dispatch = useDispatch();
     const {posts, error, loading} = useSelector(
         ({posts, loading}) => ({
@@ -35,10 +37,11 @@ const PostListContainer = ({match, location, history}) => {
     }, []);
 
     useEffect(() => {
-        console.log(match.url);
-        if (match.url === '/') {
+        if (location.pathname === '/' && location.search === '') {
             searchType.current = 'username';
+            searchTypeInput.current.value = 'username';
             searchFor.current = '';
+            searchForInput.current.value = '';
         }
     });
 
@@ -55,6 +58,8 @@ const PostListContainer = ({match, location, history}) => {
             posts={posts}
             error={error}
             loading={loading}
+            searchTypeInput={searchTypeInput}
+            searchForInput={searchForInput}
             onSearchSubmit={onSearchSubmit}
             onSearchTypeChange={onSearchTypeChange}
             onSearchForChange={onSearchForChange}

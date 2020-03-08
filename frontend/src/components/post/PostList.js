@@ -11,10 +11,40 @@ const StyledPostList = styled(Responsive)`
     margin-top: 3rem
 `;
 
-const GameStartButtonWrapper = styled.div`
+const FormAndButtonWrapper = styled.div`
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     margin-bottom: 3rem;
+`;
+
+const StyledSearchForm = styled.form`
+    select {
+        width: 6rem;
+        height: 2rem;
+        outline: none;
+        border: none;
+        border-radius: 4px;
+        background: ${palette.cyan[5]};
+        color: white;
+        text-align: center;
+        font-size: 1rem;
+        font-weight: bold;
+        margin-right: 0.4rem;
+    }
+    
+    input {
+        width: 15rem;
+        height: 2rem;
+        outline: none;
+        border: none;
+        border-radius: 4px;
+        background: ${palette.cyan[0]};
+        color: ${palette.gray[6]};
+        padding: 0 0.6rem;
+        text-align: center;
+        font-size: 1rem;
+        font-weight: bold;
+    }
 `;
 
 const StyledPostItem = styled.div`
@@ -73,17 +103,18 @@ const PostItem = ({post}) => {
     )
 };
 
-const PostList = ({posts, error, loading, onSearchSubmit, onSearchTypeChange, onSearchForChange}) => {
+const PostList = ({posts, error, loading, searchTypeInput, searchForInput, onSearchSubmit, onSearchTypeChange, onSearchForChange}) => {
     if (error) {
         return <StyledPostList>에러가 발생했습니다!</StyledPostList>
     }
 
     return (
         <StyledPostList>
-            <div>
-                <form onSubmit={onSearchSubmit}>
+            <FormAndButtonWrapper>
+                <StyledSearchForm onSubmit={onSearchSubmit}>
                     <select
                         name="searchType"
+                        ref={searchTypeInput}
                         onChange={onSearchTypeChange}
                     >
                         <option value="username">아이디</option>
@@ -93,18 +124,17 @@ const PostList = ({posts, error, loading, onSearchSubmit, onSearchTypeChange, on
                     <input
                         type="text"
                         name={"searchFor"}
-                        placeholder={"검색할 내용을 입력해주세요!!"}
+                        placeholder={"검색할 내용을 입력해주세요!!!"}
+                        ref={searchForInput}
                         onChange={onSearchForChange}
                     />
-                </form>
-            </div>
-            <GameStartButtonWrapper>
+                </StyledSearchForm>
                 {localStorage.getItem('user') && (
                     <Button to={"/game"} cyan>
                         게임 시작!
                     </Button>
                 )}
-            </GameStartButtonWrapper>
+            </FormAndButtonWrapper>
             <div>
                 {!loading && posts && (
                     posts.map(post => (
