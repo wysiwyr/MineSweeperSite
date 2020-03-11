@@ -15,6 +15,18 @@ const FormAndButtonWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     margin-bottom: 3rem;
+    @media (max-width: 550px) {
+        line-height: 1.5rem;
+    }
+    @media (max-width: 490px) {
+        display: block;
+        height: 4.6rem;
+        a {
+            display: block;
+            width: 6rem;
+            height: 2rem;
+        }
+    }
 `;
 
 const StyledSearchForm = styled.form`
@@ -30,6 +42,10 @@ const StyledSearchForm = styled.form`
         font-size: 1rem;
         font-weight: bold;
         margin-right: 0.4rem;
+        
+        @media (max-width: 550px) {
+            font-size: 0.8rem;
+        }
     }
     
     input {
@@ -44,6 +60,14 @@ const StyledSearchForm = styled.form`
         text-align: center;
         font-size: 1rem;
         font-weight: bold;
+        
+        @media (max-width: 550px) {
+            font-size: 0.8rem;
+        }
+    }
+    
+    @media (max-width: 490px) {
+        margin-bottom: 0.4rem;
     }
 `;
 
