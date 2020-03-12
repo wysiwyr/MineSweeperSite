@@ -153,11 +153,9 @@ const PostList = ({posts, error, loading, searchTypeInput, searchForInput, onSea
                         onChange={onSearchForChange}
                     />
                 </StyledSearchForm>
-                {localStorage.getItem('user') && (
-                    <Button to={"/game"} cyan>
-                        게임 시작!
-                    </Button>
-                )}
+                <Button to={"/game"} cyan>
+                    게임 시작!
+                </Button>
             </FormAndButtonWrapper>
             <div>
                 {!loading && posts && (

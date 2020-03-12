@@ -16,7 +16,7 @@ const GameContainer = ({history}) => {
     // 로그인한 유저인지 확인
     useEffect(() => {
         if (user === null) {
-            alert('올바른 접근이 아닙니다!!!');
+            alert('로그인을 해주세요!!!');
             history.push('/');
         }
         dispatch(initializeGame());
